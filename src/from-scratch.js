@@ -71,7 +71,7 @@ const handleResolvedOrRejectedPromise = (promise) => {
       return value;
     })
     .catch((error) => {
-      logError(`Your error message was: ${error.message}`);
+      console.error(`Your error message was: ${error.message}`);
       return null; 
     });
 };
