@@ -11,16 +11,40 @@ const getRandomBytes = () => new Promise((resolve, reject) => {
   });
 });
 
+// const return4RandomColors = () => {
+//   const colors = [];
+//   return getRandomBytes()
+//     .then(() => {
+//     })
+//     .then(() => {
+//     })
+//     .then(() => {
+//     })
+//     .then(() => {
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+// };
+
 const return4RandomColors = () => {
   const colors = [];
   return getRandomBytes()
-    .then(() => {
+    .then((buffer) => {
+      colors.push(numsToRGBColor([...buffer]));
+      return getRandomBytes();
     })
-    .then(() => {
+    .then((buffer) => {
+      colors.push(numsToRGBColor([...buffer]));
+      return getRandomBytes();
     })
-    .then(() => {
+    .then((buffer) => {
+      colors.push(numsToRGBColor([...buffer]));
+      return getRandomBytes();
     })
-    .then(() => {
+    .then((buffer) => {
+      colors.push(numsToRGBColor([...buffer]));
+      return colors;
     })
     .catch((err) => {
       console.error(err);

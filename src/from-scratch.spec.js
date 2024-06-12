@@ -130,3 +130,21 @@ describe(testSuiteName, () => {
   beforeEach(() => scoreCounter.add(expect));
   afterAll(scoreCounter.export);
 });
+it('handleResolvedOrRejectedPromise - uses .catch to log and safely return (in a promise) null when the passed in promise rejects', () => {
+  const randomValue = `Your random error: ${returnRandomString()}`;
+  const expectedErrorLog = `Your error message was: ${randomValue}`;
+
+  const getRejectedPromise = () => Promise.reject(new Error(randomValue));
+
+  return handleResolvedOrRejectedPromise(getRejectedPromise())
+    .then((value) => {
+      expect(value).toBeNull();
+      expect(logError).toHaveBeenCalledWith(expectedErrorLog);
+      scoreCounter.correct(expect); // DO NOT TOUCH
+    })
+    .catch((err) => {
+      // We should not hit this because your code should not throw an error
+      // what is the return value of a .catch? Is it a rejected or resolved value?
+      expect(err).toBeNull();
+    });
+});
